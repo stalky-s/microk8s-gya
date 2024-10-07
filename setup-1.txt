@@ -1,0 +1,20 @@
+##Install microk8s
+sudo snap install microk8s --classic --channel=1.31
+
+##Status check whilst listing all the nodes
+microk8s kubectl get-nodes
+
+##Deploy an app
+microk8s kubectl create deployment nginx --image=nginx
+
+##Add-ons (optional), DNS management (services communication) dan hostpath-storage.
+microk8s enable dns
+microk8s enable hostpath-storage
+
+##START AND STOP Kubernetes
+microk8s stop
+microk8s start
+
+
+
+
