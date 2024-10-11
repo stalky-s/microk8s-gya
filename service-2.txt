@@ -1,0 +1,19 @@
+## Create bot deployment (For this case, gyabot as an example)
+microk8s kubectl create deployment gyabot --image=dontrebootme/gyabot:v1
+microk8s kubectl scale deployment gyabot --replicas=2 
+
+## View our cluster with this command
+microk8s kubectl get all --all-namespaces | grep gyabot
+	## grep to filter from the namespaces
+
+## To open the dashboard, find in-between the namespace like so:
+NAMESPACE     NAME                                TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)                  AGE
+kube-system   service/kubernetes-dashboard        ClusterIP   10.152.183.64   <none>        443/TCP                  2m3s
+
+## Input https://$CLUSTER-IP:$PORT(S) in your browser to view the dashboard
+https://10.152.183.64:443
+
+## To access the dashboard, we need a token to validate ourselves. To view the token, use this command
+token=$(microk8s kubectl -n kube-system get secret | grep default-token | cut -d " " -f1)
+microk8s kubectl -n kube-system describe secret $token
+
