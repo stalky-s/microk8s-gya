@@ -1,0 +1,11 @@
+replicaCount: 3 ##Optional
+image:
+  repository: web-app-1
+  tag: latest
+  pullPolicy: IfNotPresent
+service:
+  name: my-web-app
+  type: ClusterIP
+  port: 80
+ingress:
+  enabled: false
